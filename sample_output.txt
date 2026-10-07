@@ -1,0 +1,34 @@
+=== Initial balances ===
+SAV-001: 1000.00
+CUR-001: 300.00
+SAV-002: 500.00
+CUR-002: 800.00
+
+=== Deposit validation ===
+[SAV-001] Deposit rejected: amount must be positive.
+[SAV-001] Deposited 150.00. New balance: 1150.00
+
+=== Polymorphic withdraw (300 from each) ===
+[SAV-001] Withdrew 300.00. New balance: 850.00
+[CUR-001] Withdrew 300.00. New balance: 0.00
+[SAV-002] Withdrew 300.00. New balance: 200.00
+[CUR-002] Withdrew 300.00. New balance: 500.00
+
+=== Edge case 1: Savings withdrawal rejected ===
+[SAV-001] Withdrawal of 700.00 REJECTED: balance would fall below the minimum of 200.00.
+
+=== Edge case 2: Current account overdraft within limit ===
+[CUR-001] Withdrew 400.00. New balance: -400.00 (in overdraft)
+[CUR-001] Withdrawal of 200.00 REJECTED: exceeds overdraft limit of 500.00.
+
+=== Polymorphic endOfMonth ===
+[SAV-001] Savings month-end: interest of 17.00 applied. Balance: 867.00
+[CUR-001] Current month-end: maintenance fee of 10.00 deducted. Balance: -410.00
+[SAV-002] Savings month-end: interest of 4.00 applied. Balance: 204.00
+[CUR-002] Current month-end: maintenance fee of 10.00 deducted. Balance: 490.00
+
+=== Final balances ===
+SAV-001: 867.00
+CUR-001: -410.00
+SAV-002: 204.00
+CUR-002: 490.00
